@@ -1,0 +1,34 @@
+{
+  "name": "bttree/sm-yii2-gallery",
+  "description": "SM gallery",
+  "keywords": [
+    "yii2"
+  ],
+  "homepage": "https://bitbucket.org/bttree/sm-yii2-gallery",
+  "type": "yii2-extension",
+  "license": "BSD-3",
+  "authors": [
+    {
+      "name": "Anton Sitnikov",
+      "email": "x525vx@gmail.com",
+      "homepage": "http://sitemaket.ru"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@bitbucket.org:bttree/sm-yii2-image.git"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "~2.0.7",
+    "bttree/sm-yii2-image": "*",
+    "bttree/sm-yii2-widgets": "dev-dev",
+    "2amigos/yii2-file-upload-widget": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "bttree\\smygallery\\": ""
+    }
+  }
+}

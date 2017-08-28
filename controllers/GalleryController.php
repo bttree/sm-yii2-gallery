@@ -3,9 +3,9 @@
 namespace bttree\smygallery\controllers;
 
 use Yii;
-use common\models\Gallery;
-use common\models\GalleryImage;
-use common\models\SearchGallery;
+use bttree\smygallery\models\Gallery;
+use bttree\smygallery\models\GalleryImage;
+use bttree\smygallery\models\SearchGallery;
 use yii\helpers\Json;
 use yii\web\UploadedFile;
 use yii\web\Controller;

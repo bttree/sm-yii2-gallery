@@ -35,10 +35,6 @@ class GalleryImage extends ActiveRecord
     public function behaviors()
     {
         return [
-            'sortable'            => [
-                'class'      => 'common\behaviors\SortableBehavior',
-                'sortColumn' => 'pos'
-            ],
             'imageUploadBehavior' => [
                 'class'         => ImageUploadBehavior::className(),
                 'attribute'     => 'src',

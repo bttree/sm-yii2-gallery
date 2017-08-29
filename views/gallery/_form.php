@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\Pjax;
 use \yii\helpers\Url;
 use kartik\sortable\Sortable;
 use bttree\smywidgets\widgets\SlugWidget;
@@ -26,7 +25,7 @@ use bttree\smywidgets\widgets\SlugWidget;
         <?= $form->field($model, 'slug')->widget(SlugWidget::className(),
                                                  [
                                                      'sourceFieldSelector' => '#gallery-name',
-                                                     'url'                 => ['gallery/get-model-slug'],
+                                                     'url'                 => ['smygallery/gallery/get-model-slug'],
                                                      'options'             => ['class' => 'form-control']
                                                  ]); ?>
 
@@ -46,7 +45,10 @@ use bttree\smywidgets\widgets\SlugWidget;
 
             <div id="load_photo_btn">
                 <a class="btn btn-info"
-                   href="<?= \Yii::$app->urlManager->createUrl(['/gallery/popup-upload', 'id' => $model->id]); ?>"
+                   href="<?= \Yii::$app->urlManager->createUrl([
+                                                                   'smygallery/gallery/popup-upload',
+                                                                   'id' => $model->id
+                                                               ]); ?>"
                    id="upload_link"
                    data-target="#popup-scene-upload"
                    data-toggle="modal">

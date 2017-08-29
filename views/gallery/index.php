@@ -10,7 +10,6 @@ $this->title                   = \Yii::t('smy.gallery', 'Galleries');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="gallery-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a(\Yii::t('smy.gallery', 'Create gallery'), ['create'], ['class' => 'btn btn-success']) ?>

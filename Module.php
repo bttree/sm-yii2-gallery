@@ -1,6 +1,6 @@
 <?php
 
-namespace bttree\smygallery;
+namespace common\modules\bttree\smygallery;
 
 use Yii;
 

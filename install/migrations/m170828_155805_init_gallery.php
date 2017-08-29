@@ -33,10 +33,10 @@ class m170828_155805_init_gallery extends Migration
                            ],
                            $tableOptions);
 
-        $this->addForeignKey('fk_{{%gallery}}_images',
-                             '{{%gallery_image}}',
+        $this->addForeignKey('fk_gallery_images',
+                             '{{gallery_image}}',
                              'gallery_id',
-                             '{{%gallery}}',
+                             '{{gallery}}',
                              'id',
                              'CASCADE',
                              'RESTRICT');

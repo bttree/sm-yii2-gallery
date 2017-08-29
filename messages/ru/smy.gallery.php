@@ -49,4 +49,5 @@ return [
     'Seo Description' => 'Seo описание',
     'Seo Keywords'    => 'Seo ключевые слова',
     'Seo Title'       => 'Seo заголово',
+    'Source'          => 'Файл',
 ];

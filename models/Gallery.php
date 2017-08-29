@@ -4,15 +4,19 @@ namespace bttree\smygallery\models;
 
 use Yii;
 use yii\behaviors\SluggableBehavior;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "gallery".
  *
- * @property integer $id
- * @property string  $name
- * @property string  $slug
+ * @property integer        $id
+ * @property string         $name
+ * @property string         $slug
+ *
+ * @property GalleryImage[] $images
  */
-class Gallery extends \yii\db\ActiveRecord
+class Gallery extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -52,11 +56,14 @@ class Gallery extends \yii\db\ActiveRecord
     {
         return [
             'id'   => 'ID',
-            'name' => \Yii::t('backend', 'Name'),
-            'slug' => \Yii::t('backend', 'Slug'),
+            'name' => Yii::t('smy.gallery', 'Name'),
+            'slug' => Yii::t('smy.gallery', 'Slug'),
         ];
     }
 
+    /**
+     * @return GalleryImage[]|ActiveQuery
+     */
     public function getImages()
     {
         return $this->hasMany(GalleryImage::className(), ['gallery_id' => 'id'])

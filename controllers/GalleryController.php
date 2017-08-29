@@ -7,7 +7,6 @@ use bttree\smygallery\models\Gallery;
 use bttree\smygallery\models\GalleryImage;
 use bttree\smygallery\models\SearchGallery;
 use yii\helpers\Json;
-use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,39 +32,33 @@ class GalleryController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => [
-                    'index',
-                    'view',
-                    'create',
-                    'update',
-                    'delete',
-                    'popup-upload',
-                    'photo-upload',
-                    'sort',
-                    'delete-photo'
-                ],
                 'rules' => [
                     [
-                        'allow'   => true,
                         'actions' => [
-                            'index',
-                            'view',
                             'create',
                             'update',
                             'delete',
+                            'get-model-slug',
+                            'delete-photo',
                             'popup-upload',
-                            'photo-upload',
-                            'sort',
-                            'delete-photo'
+                            'photo-upload'
                         ],
-                        'roles'   => ['galleryManage'],
+                        'allow'   => true,
+                        'roles'   => ['smygallery.edit'],
+                    ],
+                    [
+                        'actions' => ['index', 'view'],
+                        'allow'   => true,
+                        'roles'   => ['smygallery.view'],
                     ],
                 ],
             ],
         ];
     }
 
-
+    /**
+     * @return array
+     */
     public function actions()
     {
         return [
@@ -75,7 +68,6 @@ class GalleryController extends Controller
             ],
         ];
     }
-
 
     /**
      * Lists all Gallery models.
@@ -88,22 +80,25 @@ class GalleryController extends Controller
 
         return $this->render('index',
                              [
-                                 'searchModel'  => $searchModel,
                                  'dataProvider' => $dataProvider,
                              ]);
     }
 
     /**
-     * @param  integer $id
-     * @return mixed
+     * @param integer $id
+     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionPopupUpload($id = 0)
     {
         if (Yii::$app->request->isAjax) {
-            $gallery = $this->findModel($id);
-            $model   = new GalleryImage();
+            $model = new GalleryImage();
 
-            return $this->renderAjax('photo_upload', ['model' => $model, 'gallery_id' => $id, 'gallery' => $gallery]);
+            return $this->renderAjax('photo_upload',
+                                     [
+                                         'model'      => $model,
+                                         'gallery_id' => $id,
+                                     ]);
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
@@ -120,6 +115,9 @@ class GalleryController extends Controller
                                       'gallery_id' => $gallery_id,
                                   ]);
 
+        /**
+         * @var Gallery $gallery
+         */
         $gallery        = Gallery::find()->where(['id' => $gallery_id])->with('images')->one();
         $gallery_images = $gallery->images;
         if ($gallery_images) {

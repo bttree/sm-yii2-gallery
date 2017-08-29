@@ -4,6 +4,7 @@ namespace bttree\smygallery\models;
 
 use Yii;
 use bttree\smyimage\behaviors\ImageUploadBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "gallery_image".
@@ -13,8 +14,14 @@ use bttree\smyimage\behaviors\ImageUploadBehavior;
  * @property string  $src
  * @property string  $name
  * @property string  $description
+ * @property string  $pos
+ *
+ * @property Gallery $gallery
+ *
+ * @method string getImageUrl($width = 0, $height = 0, $crop = false, $stretch = false)
+ * @method void removeFile()
  */
-class GalleryImage extends \yii\db\ActiveRecord
+class GalleryImage extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -64,14 +71,25 @@ class GalleryImage extends \yii\db\ActiveRecord
         return [
             'id'          => 'ID',
             'gallery_id'  => 'Gallery ID',
-            'src'         => \Yii::t('smy.gallery', 'Source'),
-            'name'        => \Yii::t('smy.gallery', 'Name'),
-            'description' => \Yii::t('smy.gallery', 'Description'),
+            'src'         => Yii::t('smy.gallery', 'Source'),
+            'name'        => Yii::t('smy.gallery', 'Name'),
+            'description' => Yii::t('smy.gallery', 'Description'),
         ];
     }
 
+    /**
+     * @return string
+     */
     public function getImageSrc()
     {
         return $this->getImageUrl();
+    }
+
+    /**
+     * @return string
+     */
+    public function getGallery()
+    {
+        return $this->hasOne(Gallery::className(), ['id' => 'gallery_id']);
     }
 }

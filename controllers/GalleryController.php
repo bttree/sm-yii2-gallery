@@ -24,12 +24,6 @@ class GalleryController extends Controller
     public function behaviors()
     {
         return [
-            'verbs'  => [
-                'class'   => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -47,10 +41,16 @@ class GalleryController extends Controller
                         'roles'   => ['smygallery.edit'],
                     ],
                     [
-                        'actions' => ['index', 'view'],
+                        'actions' => ['index'],
                         'allow'   => true,
                         'roles'   => ['smygallery.view'],
                     ],
+                ],
+            ],
+            'verbs'  => [
+                'class'   => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -173,23 +173,8 @@ class GalleryController extends Controller
         }
     }
 
-
-    /**
-     * Displays a single Gallery model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view',
-                             [
-                                 'model' => $this->findModel($id),
-                             ]);
-    }
-
     /**
      * Creates a new Gallery model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
@@ -208,7 +193,6 @@ class GalleryController extends Controller
 
     /**
      * Updates an existing Gallery model.
-     * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */

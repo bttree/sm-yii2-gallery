@@ -20,7 +20,7 @@
                                                           'model'     => $model,
                                                           'attribute' => 'src',
                                                           'url'       => [
-                                                              'smygallery/gallery/photo-upload',
+                                                              '/smygallery/gallery/photo-upload',
                                                               'gallery_id' => $gallery_id
                                                           ],
                                                           'gallery'   => false,

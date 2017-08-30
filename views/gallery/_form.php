@@ -25,7 +25,7 @@ use bttree\smywidgets\widgets\SlugWidget;
         <?= $form->field($model, 'slug')->widget(SlugWidget::className(),
                                                  [
                                                      'sourceFieldSelector' => '#gallery-name',
-                                                     'url'                 => ['smygallery/gallery/get-model-slug'],
+                                                     'url'                 => ['/smygallery/gallery/get-model-slug'],
                                                      'options'             => ['class' => 'form-control']
                                                  ]); ?>
 

@@ -24,7 +24,7 @@ class m170828_155805_init_gallery extends Migration
 
         $this->createTable('{{%gallery_image}}',
                            [
-                               'id'          => $this->integer()->notNull(),
+                               'id'          => $this->primaryKey(),
                                'gallery_id'  => $this->integer()->notNull(),
                                'pos'         => $this->integer()->notNull(),
                                'name'        => $this->string(),

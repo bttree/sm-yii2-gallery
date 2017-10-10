@@ -41,7 +41,7 @@ use bttree\smywidgets\widgets\SlugWidget;
 <?php if (!$model->isNewRecord): ?>
     <div class="panel">
 
-        <div class="gallery-images">
+        <div class="gallery-images" data-sort-url="<?= Url::to('/smygallery/gallery/sort')?>">
 
             <div id="load_photo_btn">
                 <a class="btn btn-info"
@@ -85,10 +85,10 @@ use bttree\smywidgets\widgets\SlugWidget;
                 }
 
                 echo Sortable::widget([
-                                          'type'         => 'grid',
-                                          'items'        => $arrGrid,
-                                          'pluginEvents' => [
-                                              'sortupdate' => 'function() { 
+                      'type'         => 'grid',
+                      'items'        => $arrGrid,
+                      'pluginEvents' => [
+                          'sortupdate' => 'function() { 
                             var aR;
                             aR = new Array();
                             
@@ -97,17 +97,19 @@ use bttree\smywidgets\widgets\SlugWidget;
                                 aR[i] = $(divs[i]).attr("data-divid")
                             }
                             
-                           $.ajax({
+                            var url = $(".gallery-images").data("sort-url");
+                            
+                          $.ajax({
                               type: "GET",
-                              url: "/gallery/sort",
+                              url: url,
                               data: { aR: aR },
                               success: function(msg)
                               {
                               }
-                            });
+                          });
                         }',
-                                          ],
-                                      ]);
+                      ],
+                ]);
                 ?>
 
             <?php else: ?>

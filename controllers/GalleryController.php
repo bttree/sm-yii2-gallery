@@ -35,7 +35,8 @@ class GalleryController extends Controller
                             'get-model-slug',
                             'delete-photo',
                             'popup-upload',
-                            'photo-upload'
+                            'photo-upload',
+                            'sort'
                         ],
                         'allow'   => true,
                         'roles'   => ['smygallery.edit'],
@@ -225,6 +226,35 @@ class GalleryController extends Controller
 
         return $this->redirect(['index']);
     }
+
+
+    /**
+     * New order for Images in Gallery.
+     *
+     */
+    public function actionSort()
+    {
+        if (Yii::$app->request->isAjax) {
+            $request = Yii::$app->request;
+            $aR = $request->get('aR');
+            $photos = GalleryImage::find()->where(['id' => $aR])->indexBy('id')->all();
+
+            foreach ($aR as $key => $val) {
+                if ($photos[$val]->pos == ($key + 1)) {
+                    continue;
+                } else {
+                    $photos[$val]->pos = $key + 1;
+                    $photos[$val]->save();
+                }
+            }
+
+            Yii::$app->session->setFlash('success', Yii::t('smy.gallery', 'Order was changed'));
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['result' => 'success'];
+        }
+    }
+
+
 
     /**
      * Finds the Gallery model based on its primary key value.

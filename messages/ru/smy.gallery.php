@@ -45,6 +45,8 @@ return [
     'Slug'               => 'Слаг',
     'Create Time'        => 'Время создания',
     'Update Time'        => 'Время обновления',
+    'Successfuly saved'  => 'Успешно сохранено',
+    'Order was changed'  => 'Порядок изменен',
 
     'Seo Description' => 'Seo описание',
     'Seo Keywords'    => 'Seo ключевые слова',

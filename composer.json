@@ -23,7 +23,7 @@
   "require": {
     "yiisoft/yii2": "~2.0.7",
     "bttree/sm-yii2-image": "*",
-    "bttree/sm-yii2-widgets": "dev-dev",
+    "bttree/sm-yii2-widgets": "dev-master",
     "2amigos/yii2-file-upload-widget": "~1.0",
     "kartik-v/yii2-sortable": "*"
   },
